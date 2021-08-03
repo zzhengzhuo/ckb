@@ -286,6 +286,24 @@ impl TxPoolService {
         // Should recalculate current time after create cellbase (create cellbase may spend a lot of time)
         let current_time = cmp::max(unix_time_as_millis(), tip_header.timestamp() + 1);
 
+        let extension = {
+            if snapshot
+                .consensus()
+                .hardfork_switch()
+                .is_reuse_uncles_hash_as_extra_hash_enabled(current_epoch.number())
+            {
+                // Add a block extension at random.
+                if current_time % 3 == 0 {
+                    None
+                } else {
+                    let length = ((current_time / 3) % 96) as u8 + 1; // in [1, 96]
+                    Some((0..length).into_iter().collect::<Vec<_>>().pack().into())
+                }
+            } else {
+                None
+            }
+        };
+
         Ok(BlockTemplate {
             version: version.into(),
             compact_target: current_epoch.compact_target().into(),
@@ -302,7 +320,7 @@ impl TxPoolService {
             cellbase: BlockAssembler::transform_cellbase(&cellbase, None),
             work_id: work_id.into(),
             dao: dao.into(),
-            extension: None,
+            extension,
         })
     }
 
