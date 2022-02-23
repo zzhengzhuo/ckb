@@ -1096,7 +1096,7 @@ dependencies = [
  "ckb-traits",
  "ckb-types",
  "ckb-vm",
- "ckb-vm-definitions",
+ "ckb-vm-definitions 0.20.0-rc5 (registry+https://github.com/rust-lang/crates.io-index)",
  "faster-hex",
  "goblin 0.2.3",
  "proptest",
@@ -1368,13 +1368,12 @@ dependencies = [
 [[package]]
 name = "ckb-vm"
 version = "0.20.0-rc5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60dcf786d3e6424be300a84b65a35bafc8344de5350fa96500ed9f6cc370865f"
+source = "git+https://github.com/zzhengzhuo/ckb-vm.git?branch=0.20.0-rc6#fda314898981032bbfc906ea99ecee8b91e8a9e0"
 dependencies = [
  "byteorder",
  "bytes 1.1.0",
  "cc",
- "ckb-vm-definitions",
+ "ckb-vm-definitions 0.20.0-rc5 (git+https://github.com/zzhengzhuo/ckb-vm.git?branch=0.20.0-rc6)",
  "derive_more",
  "goblin 0.2.3",
  "goblin 0.4.0",
@@ -1390,6 +1389,11 @@ name = "ckb-vm-definitions"
 version = "0.20.0-rc5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "deb44cd2753aaeb2dc8a3df7b293ddfc3cbaaf8232d819650c0fc365cacda34f"
+
+[[package]]
+name = "ckb-vm-definitions"
+version = "0.20.0-rc5"
+source = "git+https://github.com/zzhengzhuo/ckb-vm.git?branch=0.20.0-rc6#fda314898981032bbfc906ea99ecee8b91e8a9e0"
 
 [[package]]
 name = "clap"
